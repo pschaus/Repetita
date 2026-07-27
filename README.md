@@ -180,8 +180,11 @@ java -jar target/repetita-0.1.0.jar \
   -graph data/2016TopologyZooUCL_inverseCapacity/Airtel.graph \
   -demands data/2016TopologyZooUCL_inverseCapacity/Airtel.0000.demands \
   -solver defoCP \
+  -t 2 \
   -visualize
 ```
+
+This executes the chosen solver and automatically opens an interactive JUNG Swing GUI window displaying the topology graph with color-coded link utilization.
 
 ### Programmatic Usage in Java
 
