@@ -15,7 +15,7 @@ object Dijkstra {
     
     def reachable(v: Int): Set[Int] = {
       var visited = Set[Int]()
-      def dfs(n: Int) {
+      def dfs(n: Int): Unit = {
         visited += n
         val inEdges = topology.inEdges(n)
         for (e <- inEdges) {

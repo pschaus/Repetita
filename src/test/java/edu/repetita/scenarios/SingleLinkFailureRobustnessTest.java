@@ -74,7 +74,7 @@ public class SingleLinkFailureRobustnessTest {
 
                 // assert that results are the same
                 Analysis newAnalysis = analyzer.analyze(newSetting);
-                System.out.println("considering link " + edge + " (stored maxLinkLoad " + analyses.get(key).maxLinkLoad + ", freshly computed maxLinkLoad " + newAnalysis.maxLinkLoad + ")");
+                // System.out.println("considering link " + edge + " (stored maxLinkLoad " + analyses.get(key).maxLinkLoad + ", freshly computed maxLinkLoad " + newAnalysis.maxLinkLoad + ")");
                 assert newAnalysis.maxLinkLoad == analyses.get(key).maxLinkLoad;
             }
         }

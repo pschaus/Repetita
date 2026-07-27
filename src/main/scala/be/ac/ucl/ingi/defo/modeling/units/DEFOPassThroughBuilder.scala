@@ -10,17 +10,17 @@ class DEFOPassThroughBuilder(demandId: Int, nodes: Array[Int]) {
 
   private[this] val seqNodes = ArrayBuffer[Array[Int]](nodes)
   
-  def then(node: DEFONode): DEFOPassThroughBuilder = {
+  def `then`(node: DEFONode): DEFOPassThroughBuilder = {
     val n = Array(node.nodeId)
     seqNodes.append(n)
     this
   }
   
-  def then(nodes: DEFONode*): DEFOPassThroughBuilder = then(nodes.toArray)
+  def `then`(nodes: DEFONode*): DEFOPassThroughBuilder = `then`(nodes.toArray)
   
-  def then(nodes: Traversable[DEFONode]): DEFOPassThroughBuilder = then(nodes.toArray)
+  def `then`(nodes: Traversable[DEFONode]): DEFOPassThroughBuilder = `then`(nodes.toArray)
   
-  def then(nodes: Array[DEFONode]): DEFOPassThroughBuilder = {
+  def `then`(nodes: Array[DEFONode]): DEFOPassThroughBuilder = {
     val n = nodes.map(_.nodeId)
     seqNodes.append(n)
     this

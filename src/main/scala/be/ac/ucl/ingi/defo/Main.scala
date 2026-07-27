@@ -206,7 +206,7 @@ object Main extends App {
         val path = problem.assignedPath(demand, solver)
         if (path.length > 2) {
           nPaths += 1
-          file.println(demand + " " + path.map(i => topologyData.nodeLabels(i)).mkString(" "))
+          file.println(s"$demand ${path.map(i => topologyData.nodeLabels(i)).mkString(" ")}")
         }
       }
       file.println()

@@ -8,7 +8,7 @@ name := "Repetita"
 
 version := "0.1.0"
 
-scalaVersion := "2.13.6"
+scalaVersion := "3.3.8"
 
 
 resolvers += "Mvn" at "https://cogcomp.seas.upenn.edu/m2repo/"
@@ -17,8 +17,8 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 // Adding a library dependency for ScalaTest
 libraryDependencies ++= Seq(
-    "gurobi" % "gurobi" % "5.0.1",
-    "com.github.pschaus.oscar" % "oscar-cp_2.13" % "main-b5cb0738c5-1",
+    "com.google.ortools" % "ortools-java" % "9.8.3296",
+    "io.github.pschaus" %% "oscar-cp" % "4.0.0",
     "org.scalatest" %% "scalatest" % "3.2.16" % Test,
     "org.apache.commons" % "commons-lang3" % "3.13.0",
     "net.sourceforge.collections" % "collections-generic" % "4.01",
@@ -26,8 +26,8 @@ libraryDependencies ++= Seq(
     "net.sf.jung" % "jung-visualization" % "2.1.1",
     "net.sf.jung" % "jung-graph-impl" % "2.1.1",
     "org.scala-lang.modules" %% "scala-xml" % "2.2.0",
-    "junit" % "junit" % "4.12",
-    "com.novocode" % "junit-interface" % "0.11" % Test
+    "junit" % "junit" % "4.13.2" % Test,
+    "com.github.sbt" % "junit-interface" % "0.13.3" % Test
 )
 
 
@@ -39,3 +39,7 @@ scalacOptions ++= Seq(
     "-deprecation",
     "-feature"
 )
+
+Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oF")
+Test / testOptions += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
+Test / fork := true

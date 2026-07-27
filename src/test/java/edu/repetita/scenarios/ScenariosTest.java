@@ -35,7 +35,7 @@ public class ScenariosTest {
             s.setup(setting, solver);
 
             // run the scenario
-            System.out.println("\nTesting scenario " + s.getClass().getSimpleName());
+            // System.out.println("\nTesting scenario " + s.getClass().getSimpleName());
             s.run(timeLimitInSec * 1000);
         }
     }

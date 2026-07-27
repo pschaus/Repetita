@@ -35,11 +35,11 @@ public class TabuLSTest {
         this.solver.solve(setting, 10 * 1000);
         double loadAfter10 = this.getMaxLinkUtilization(setting);
 
-        System.out.println("\n*** Optimization results ***");
-        System.out.println("initial link utilization: " + initialLoad);
-        System.out.println("link utilization after 1 second: " + loadAfter1);
-        System.out.println("link utilization after 5 seconds: " + loadAfter5);
-        System.out.println("link utilization after 10 seconds: " + loadAfter10);
+        // System.out.println("\n*** Optimization results ***");
+        // System.out.println("initial link utilization: " + initialLoad);
+        // System.out.println("link utilization after 1 second: " + loadAfter1);
+        // System.out.println("link utilization after 5 seconds: " + loadAfter5);
+        // System.out.println("link utilization after 10 seconds: " + loadAfter10);
 
         assert(loadAfter1 < initialLoad);
         assert(loadAfter5 <= loadAfter1);

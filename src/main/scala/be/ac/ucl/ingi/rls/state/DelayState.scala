@@ -51,7 +51,7 @@ extends TrialState {
   override def updateState() = {
     // update
     val changedDemand = pathState.changed
-    var p = pathState.nChanged
+    var p = pathState.nChanged()
     while (p > 0) {
       p -= 1
       val demand = changedDemand(p)

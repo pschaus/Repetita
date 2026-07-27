@@ -46,7 +46,7 @@ extends ArrayStateDouble(nEdges)
   
   override def updateState() = {
     // update my state according to last changes on pathState
-    var pChanged = pathState.nChanged
+    var pChanged = pathState.nChanged()
     val changed = pathState.changed
     while (pChanged > 0) {
       pChanged -= 1
@@ -274,7 +274,7 @@ extends ArrayStateDouble(nEdges)
   
   private def updateFlowState() = {
     // update my state according to last changes on pathState
-    var pChanged = pathState.nChanged
+    var pChanged = pathState.nChanged()
     val changed = pathState.changed
     while (pChanged > 0) {
       pChanged -= 1

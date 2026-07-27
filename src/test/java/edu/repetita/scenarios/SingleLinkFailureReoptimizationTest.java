@@ -70,7 +70,7 @@ public class SingleLinkFailureReoptimizationTest {
                 // assert that results are the same
                 newSolver.solve(originalSetting,longtime);
                 Analysis newAnalysis = analyzer.analyze(originalSetting);
-                System.out.println("broke edge " + edge + " stored maxLinkLoad " + analyses.get("Failed link " + edge + " post-optimization").maxLinkLoad + " manual maxLinkLoad " + newAnalysis.maxLinkLoad + " (difference " + (newAnalysis.maxLinkLoad - analyses.get("Failed link " + edge + " post-optimization").maxLinkLoad) + ")");
+                // System.out.println("broke edge " + edge + " stored maxLinkLoad " + analyses.get("Failed link " + edge + " post-optimization").maxLinkLoad + " manual maxLinkLoad " + newAnalysis.maxLinkLoad + " (difference " + (newAnalysis.maxLinkLoad - analyses.get("Failed link " + edge + " post-optimization").maxLinkLoad) + ")");
                 assert Math.abs(newAnalysis.maxLinkLoad - analyses.get("Failed link " + edge + " post-optimization").maxLinkLoad) < 1e-3;
 
                 // repair the failure by setting the original weight

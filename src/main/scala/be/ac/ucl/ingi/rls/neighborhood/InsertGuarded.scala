@@ -51,7 +51,7 @@ extends Neighborhood[Demand]
     size = pathState.size(demand)
   }
   
-  override def hasNext() = !(node == nNodes - 1 && position == size - 1) && size < maxDetourSize
+  override def hasNext() = size >= 2 && !(node == nNodes - 1 && position == size - 1) && size < maxDetourSize
   
   override def next(): Unit = {
     node += 1

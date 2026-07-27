@@ -29,6 +29,9 @@ public class Main {
     }
 
 	private static String getUsageOptions(){
+	    if (storage == null) {
+	        storage = RepetitaStorage.getInstance();
+	    }
 	    ArrayList<String> options = new ArrayList<>();
         ArrayList<String> descriptions = new ArrayList<>();
 
@@ -61,7 +64,7 @@ public class Main {
         System.out.println(getUsage());
         System.out.println(getUsageOptions());
 
-		System.exit(1);
+		throw new IllegalArgumentException(additional != null ? additional : "");
 	}
 
 	private static void printReadme(){

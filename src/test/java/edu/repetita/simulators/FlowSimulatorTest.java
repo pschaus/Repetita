@@ -27,18 +27,18 @@ public class FlowSimulatorTest {
         this.simulator.computeFlows();
 
         // maximum link utilization is not zero
-        System.out.println(Arrays.toString(this.simulator.flow));
-        System.out.println(this.simulator.getMaxUtilization());
+        // System.out.println(Arrays.toString(this.simulator.flow));
+        // System.out.println(this.simulator.getMaxUtilization());
         assert this.simulator.getMaxUtilization() > 0;
 
         // check that the link utilization is the same as running only the ECMP flow simulator
         ECMPFlowSimulator ecmp = new ECMPFlowSimulator();
         ecmp.setup(setting);
         ecmp.computeFlows();
-        System.out.println(FlowSimulator.getMaxUtilization(ecmp.getFlow(),setting));
+        // System.out.println(FlowSimulator.getMaxUtilization(ecmp.getFlow(),setting));
         assert this.simulator.getMaxUtilization() == FlowSimulator.getMaxUtilization(ecmp.getFlow(),setting);
 
-        System.out.println(FlowSimulator.getInstance().nextHops);
+        // System.out.println(FlowSimulator.getInstance().nextHops);
     }
 
     /*
@@ -60,8 +60,8 @@ public class FlowSimulatorTest {
         double simulatedLoad = simulator.getMaxUtilization();
 
         // compare the extracted values
-        System.out.println("Maximum link maxLinkLoad computed by the solver: " + solverLoad);
-        System.out.println("Maximum link maxLinkLoad computed by the Repetita simulator: " + simulatedLoad);
+        // System.out.println("Maximum link maxLinkLoad computed by the solver: " + solverLoad);
+        // System.out.println("Maximum link maxLinkLoad computed by the Repetita simulator: " + simulatedLoad);
         assert solverLoad >= 0.0 && Math.abs(solverLoad - simulatedLoad) <= 1e-6;
     }*/
 
@@ -97,7 +97,7 @@ public class FlowSimulatorTest {
         }
 
         // check subset of printed paths (explicit and igp paths for destination b)
-        System.out.println(this.simulator.getNextHops());
+        // System.out.println(this.simulator.getNextHops());
         String[] pathDescriptionFragments = this.simulator.getNextHops().split("Destination b\n");
         String explicitPathsForB = pathDescriptionFragments[1].split("\n\n")[0];
         assert explicitPathsForB.equals("node: c, next hops: [a]\nnode: a, next hops: [b]");

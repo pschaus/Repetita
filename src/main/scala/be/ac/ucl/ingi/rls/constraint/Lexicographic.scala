@@ -19,14 +19,14 @@ extends Trial {
   private[this] var nDetours = 0
   private[this] var oldNDetours = nDetours
   
-  private[this] val scores = Array.tabulate(nTrials)(i => trials_(i).score)
+  private[this] val scores = Array.tabulate(nTrials)(i => trials_(i).score())
   private[this] val oldScores = Array.tabulate(nTrials)(scores)
   
   private def updateFrom(index: Int): Unit = {
     var p = index
     while (p < nTrials) {
       trials_(p).update()
-      scores(p) = trials_(p).score
+      scores(p) = trials_(p).score()
       p += 1
     }
   }
@@ -54,7 +54,7 @@ extends Trial {
     var p = 0
     while (p < nTrials && continue) {
       trials_(p).update()
-      scores(p) = trials_(p).score
+      scores(p) = trials_(p).score()
       continue = scores(p) == oldScores(p)
       p += 1
     }

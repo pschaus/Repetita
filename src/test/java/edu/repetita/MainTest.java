@@ -59,28 +59,13 @@ public class MainTest {
     }
 
     // classes to avoid that tests fail when they exit with errors
-    protected static class ExitException extends SecurityException {
+    protected static class ExitException extends RuntimeException {
         public final int exitStatus;
         public ExitException(int status) {
             super("There is no escape!");
             this.exitStatus = status;
         }
     }
-
-    final SecurityManager exitSecurityManager = new SecurityManager() {
-        public void checkPermission(Permission perm)
-        {
-            // allow anything.
-        }
-        public void checkPermission(Permission perm, Object context)
-        {
-            // allow anything.
-        }
-        public void checkExit(int status) {
-            super.checkExit(status);
-            throw new ExitException(status);
-        }
-    } ;
 
     /* Tests */
 
@@ -94,34 +79,40 @@ public class MainTest {
     public void tearDown(){
         // reset stdout
         System.setOut(stdout);
-
-        //clear possible security managers
-        System.setSecurityManager( null ) ;
     }
 
     @Test
     public void testMain_noErrors_noParameters () throws Exception {
-        System.setSecurityManager( this.exitSecurityManager ) ;
+        java.io.PrintStream originalOut = System.out;
+        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
+            public void write(int b) {}
+        }));
         try {
             Main.main(new String[0]);
         }
-        catch (ExitException e){
-            assert(e.exitStatus == 1);
+        catch (IllegalArgumentException e){
+            assert(true);
+        } finally {
+            System.setOut(originalOut);
         }
     }
 
     @Test
     public void testMain_noErrors_Help () throws Exception {
-        System.setSecurityManager( this.exitSecurityManager ) ;
+        java.io.PrintStream originalOut = System.out;
+        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
+            public void write(int b) {}
+        }));
         try {
             String[] options = {"-h"};
             Main.main(options);
         }
-        catch (ExitException e){
-            assert(e.exitStatus == 1);
+        catch (IllegalArgumentException e){
+            assert(true);
+        } finally {
+            System.setOut(originalOut);
         }
     }
-
     @Test
     public void testSetMultipleDemands_noErrors_defaultAdditionalDemandChanges () throws Exception {
         String changesFilelist = this.warehouse.getDefaultDemandChangeFiles().toString();
@@ -137,10 +128,10 @@ public class MainTest {
     public void testPrintDoc_noErrorsAndWriteFiles () throws Exception {
         Main.main(new String[]{"-doc"});
         String readmeContent = new String(Files.readAllBytes(Paths.get(IOConstants.REPETITA_READMEFILE)));
-        System.out.println("*** README file ***\n" + readmeContent);
+        // System.out.println("*** README file ***\n" + readmeContent);
         assert !readmeContent.isEmpty();
         String specsContent = new String(Files.readAllBytes(Paths.get(IOConstants.SOLVER_SPECSFILE)));
-        System.out.println("\n*** External solvers spec file ***\n" + specsContent);
+        // System.out.println("\n*** External solvers spec file ***\n" + specsContent);
         assert !specsContent.isEmpty();
     }
 
@@ -167,7 +158,7 @@ public class MainTest {
         Path outfile = Paths.get(outpathsFilename);
         String content = new String(Files.readAllBytes(outfile));
         Files.delete(outfile);
-        System.out.println(content);
+        // System.out.println(content);
         Pattern regex = Pattern.compile(".*Next hops priority 1 \\(explicit paths\\)\\*\\*\\*\n\n\\*\\*\\*Next hops priority 2.*", Pattern.DOTALL);
         Matcher regexMatcher = regex.matcher(content);
         assert regexMatcher.find();
@@ -205,7 +196,7 @@ public class MainTest {
         String content = new String(Files.readAllBytes(Paths.get(logFilename)));
         // reset stdout to print content in a visible way
         System.setOut(stdout);
-        System.out.println(content);
+        // System.out.println(content);
         Pattern regex = Pattern.compile(".*Selected a ratio of .* nodes as acceptable detours.*", Pattern.DOTALL);
         Matcher regexMatcher = regex.matcher(content);
         assert regexMatcher.find();
@@ -220,7 +211,7 @@ public class MainTest {
             this.customArgs.put("-scenario",s);
             this.setArgs(this.customArgs);
 
-            System.out.println("\nTrying scenario " + s);
+            // System.out.println("\nTrying scenario " + s);
 
             // redirect output to log file (while keeping a reference to the stdout)
             File f = new File(logFilename);
@@ -235,7 +226,7 @@ public class MainTest {
             String logContent = new String(Files.readAllBytes(Paths.get(logFilename)));
             assert logContent.isEmpty();
             String outContent = new String(Files.readAllBytes(Paths.get(outFilename)));
-            System.out.println(outContent);
+            // System.out.println(outContent);
             assert !outContent.isEmpty();
         }
     }
@@ -274,7 +265,7 @@ public class MainTest {
         Path outfile = Paths.get(outpathsFilename);
         String content = new String(Files.readAllBytes(outfile));
         Files.delete(outfile);
-        System.out.println(content);
+        // System.out.println(content);
         Pattern regex = Pattern.compile(".*Next hops priority 1 \\(explicit paths\\)\\*\\*\\*\n\nDestination.*", Pattern.DOTALL);
         Matcher regexMatcher = regex.matcher(content);
         assert regexMatcher.find();

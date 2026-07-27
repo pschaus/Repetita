@@ -12,7 +12,7 @@ class NoDuplicate(pathState: PathState)
 extends Trial {
   override def check(): Boolean = {
     val changed = pathState.changed
-    var pChanged = pathState.nChanged
+    var pChanged = pathState.nChanged()
     
     while (pChanged > 0) {
       pChanged -= 1

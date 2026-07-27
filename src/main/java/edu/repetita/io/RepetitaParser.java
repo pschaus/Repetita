@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -152,20 +153,32 @@ final public class RepetitaParser {
         }
     }
 
+    private static URL getResourceURL(String filename) {
+        URL res = Thread.currentThread().getContextClassLoader().getResource(filename);
+        if (res == null) res = RepetitaParser.class.getClassLoader().getResource(filename);
+        if (res == null) res = ClassLoader.getSystemResource(filename);
+        return res;
+    }
+
+    private static InputStream getResourceStream(String filename) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(filename);
+        if (is == null) is = RepetitaParser.class.getClassLoader().getResourceAsStream(filename);
+        if (is == null) is = ClassLoader.getSystemResourceAsStream(filename);
+        return is;
+    }
+
     public static Map<String,Map<String,String>> parseExternalSolverFeatures(String filename) {
-        String path = ClassLoader.getSystemResource(filename).getPath();
+        URL url = getResourceURL(filename);
+        String path = url != null ? url.getPath() : filename;
         
         Map<String,Map<String,String>> solverFeatures = new HashMap<>();
 
-        try (InputStream resource = ClassLoader.getSystemResourceAsStream(filename)) {
+        try (InputStream resource = getResourceStream(filename)) {
             List<String> lines =
                     new BufferedReader(new InputStreamReader(resource,
                             StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
-            System.out.println("))>"+lines);
             Map<String,String> currFeatures = new HashMap<>();
-
             for (String line: lines) {
-                System.out.println(line);
                 if (line.isEmpty() || line.startsWith("#")) continue;
 
                 if (line.startsWith("[")){

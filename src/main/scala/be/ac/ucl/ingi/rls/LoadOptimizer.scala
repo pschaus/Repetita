@@ -32,8 +32,8 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
   private val capacityData = new CapacityData {
     private val capa    = topologyData.edgeCapacities
     private val invcapa = topologyData.edgeCapacities.map(1.0 / _)
-    def capacity(): Array[Double] = capa
-    def invCapacity(): Array[Double] = invcapa
+    def capacity: Array[Double] = capa
+    def invCapacity: Array[Double] = invcapa
   }
   
   /*
@@ -86,7 +86,7 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
   val bestPaths = new SavedPathState(pathState)
   pathState.addTrial(bestPaths)
 
-  implicit private val neighborhoodDebug = false
+  implicit private val neighborhoodDebug: Boolean = false
   
   val ecmp = new ECMP(nNodes, nEdges, shortestPaths)
   
@@ -105,19 +105,19 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
   )
   
   def startMoving(timeLimit: Long, objectiveLimit: Double): Unit = {
-    if (debug) println(s"Starting with maxLinkLoad ${maxLoad.score}")
+    if (debug) println(s"Starting with maxLinkLoad ${maxLoad.score()}")
     
     // try moves until stop condition, time for now
     val startTime = System.nanoTime()
     val stopTime = startTime + (timeLimit * 1000000L)
-    var bestLoad = maxLoad.score
+    var bestLoad = maxLoad.score()
     var nIterations = 0L
     var bestIteration = 0L
     
     while (System.nanoTime() < stopTime && bestLoad > objectiveLimit) {
       nIterations += 1
       
-      if (maxLoad.score > bestLoad && nIterations > bestIteration + 1000) {
+      if (maxLoad.score() > bestLoad && nIterations > bestIteration + 1000) {
         bestPaths.restorePaths()
         pathState.update()
         pathState.commit()
@@ -126,7 +126,7 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
       
       val demand = selectDemand()
       
-      if (maxLoad.score == bestLoad && nIterations > bestIteration + 3) {
+      if (maxLoad.score() == bestLoad && nIterations > bestIteration + 3) {
         bestIteration = nIterations
         kick(kickNeighborhoods, maxLoad, demand)
       }
@@ -143,9 +143,9 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
           pathState.update()
           pathState.commit()
           
-          if (maxLoad.score < bestLoad) {
+          if (maxLoad.score() < bestLoad) {
             bestPaths.savePaths()
-            bestLoad = maxLoad.score
+            bestLoad = maxLoad.score()
             bestIteration = nIterations
           }
         }
@@ -153,11 +153,11 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
         pNeighborhood += 1
       }
     }
-    if (debug) println(s"Finished with maxLinkLoad ${maxLoad.score}")
+    if (debug) println(s"Finished with maxLinkLoad ${maxLoad.score()}")
   }
 
   // do the best move of the neighborhood, even if it degrades the objective
-  private def kick(neighborhoods: IndexedSeq[Neighborhood[Demand]], maxLoad: MaxLoad, demand: Int) = {
+  private def kick(neighborhoods: IndexedSeq[Neighborhood[Demand]], maxLoad: MaxLoad, demand: Int): Unit = {
     maxLoad.active = false
     val choice = Random.nextInt(neighborhoods.length)
     val neighborhood = neighborhoods(choice)
@@ -169,9 +169,9 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
     maxLoad.active = true
   }
   
-  private def visitNeighborhood[T](neighborhood: Neighborhood[T], setter: T): Boolean = {
-    var nBestMoves = 0
+  private def visitNeighborhood(neighborhood: Neighborhood[Demand], setter: Demand): Boolean = {
     var bestNeighborhoodLoad = Double.MaxValue
+    var nBestMoves = 0
     var improvementFound = false
 
     neighborhood.setNeighborhood(setter)
@@ -180,8 +180,8 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
       neighborhood.apply()
       
       // to find random best movement in neighborhood
-      if (pathState.nChanged > 0 && pathState.check()) {
-        val score = maxLoad.score
+      if (pathState.nChanged() > 0 && pathState.check()) {
+        val score = maxLoad.score()
         
         if (score == bestNeighborhoodLoad) {
           nBestMoves += 1
@@ -191,7 +191,7 @@ class LoadOptimizer(topologyData: TopologyData, decisionDemands: DemandsData)(de
           nBestMoves = 1
           improvementFound = true
           neighborhood.saveBest()
-          bestNeighborhoodLoad = maxLoad.score
+          bestNeighborhoodLoad = maxLoad.score()
         }
         
         pathState.revert()

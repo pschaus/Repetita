@@ -20,7 +20,7 @@ public class TopologyTest {
 
         Topology newSquare = square.removeUndirectedEdge(2);
 
-        System.out.println(Arrays.toString(newSquare.edgeLabel));
+        // System.out.println(Arrays.toString(newSquare.edgeLabel));
         assert newSquare.edgeLabel.length == square.edgeLabel.length - 2;
         for(String l: newSquare.edgeLabel){
             assert !l.equals(linkLabel);

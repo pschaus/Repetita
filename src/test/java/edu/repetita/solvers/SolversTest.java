@@ -32,7 +32,7 @@ public class SolversTest {
             if(solver.getOptimizationObjective().equals(IOConstants.SOLVER_OBJVALUES[1])){
                 // clone the setting, to avoid that changes made by one solver propagate to the following
                 Setting settingCopy = setting.clone();
-                System.out.println("\nTesting solver " + solver.name());
+                // System.out.println("\nTesting solver " + solver.name());
                 solver.solve(settingCopy,timeLimitInSec * 1000);
 
                 // assert that IGP weights are integers
@@ -58,12 +58,12 @@ public class SolversTest {
     @Test
     public void testRun_checkSolversReduceMaxLinkUtilization_defaultSettingAllInternalLoadOptimizationSolvers () {
         double initLoad = this.getMaxLoad(warehouse.getDefaultSetting());
-        System.out.println("\n\nOptimization results\ninitial max link utilization: " + initLoad);
+        // System.out.println("\n\nOptimization results\ninitial max link utilization: " + initLoad);
         Map<String,Setting> optimizedSettings = this.runAllInternalLoadOptimizationSolvers(5);
         for (String solverName: optimizedSettings.keySet()){
             Setting optSetting = optimizedSettings.get(solverName);
             double optLoad = this.getMaxLoad(optSetting);
-            System.out.println("Max link utilization after optimization from solver " + solverName + ": " + optLoad);
+            // System.out.println("Max link utilization after optimization from solver " + solverName + ": " + optLoad);
             assert optLoad < initLoad;
         }
     }

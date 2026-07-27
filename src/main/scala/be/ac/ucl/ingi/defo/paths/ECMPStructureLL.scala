@@ -73,7 +73,7 @@ object ECMPStructureLL {
       val results = collection.mutable.Map.empty[A, B]
       def apply(in: A) = results.getOrElseUpdate(in, f(in))
     }
-    lazy val maxLatency: Function1[(Int, Int), Int] = memoize { t: (Int, Int) =>
+    lazy val maxLatency: Function1[(Int, Int), Int] = memoize { (t: (Int, Int)) =>
       val (s, d) = t
       if (s == d) 0
       else {
@@ -83,7 +83,7 @@ object ECMPStructureLL {
       }
     }
     
-    maxLatency(source,dest)
+    maxLatency((source, dest))
   }
   
     

@@ -17,57 +17,59 @@ package be.ac.ucl.ingi.rls.structure
 import scala.math.{min, max}
 
 object SortUtils {
-	/* Sorts the elements e in nondecreasing order according to their keys[e].
-	 * This is a stable sort.
-	 * @param elements have to be in [0, keys.length)
-	 */
-	final def mergeSort(elements: Array[Int], keys: Array[Int]): Unit = {
-	  mergeSort(elements, keys, 0, elements.length)
-	}
-	
-	
-	/* Sorts the elements e in nondecreasing order according to their keys[e],
-	 * but only those in [base, topExcluded) 
-	 * This is a stable sort.
-	 * @param elements whose index are in [base, topExcluded) have to be in [0, keys.length)
-	 */
-	final def mergeSort(elements: Array[Int], keys: Array[Int], base: Int, topExcluded: Int): Unit = {
-	  val n = elements.length
-	  val runs = new Array[Int](n+1)
+  /* Sorts the elements e in nondecreasing order according to their keys[e].
+   * This is a stable sort.
+   * @param elements have to be in [0, keys.length)
+   */
+  final def mergeSort(elements: Array[Int], keys: Array[Int]): Unit = {
+    mergeSort(elements, keys, 0, elements.length)
+  }
+  
+  
+  /* Sorts the elements e in nondecreasing order according to their keys[e],
+   * but only those in [base, topExcluded) 
+   * This is a stable sort.
+   * @param elements whose index are in [base, topExcluded) have to be in [0, keys.length)
+   */
+  final def mergeSort(elements: Array[Int], keys: Array[Int], base: Int, topExcluded: Int): Unit = {
+    val n = elements.length
+    val runs = new Array[Int](n+1)
     val aux = new Array[Int](n)
     
-	  mergeSort(elements, keys, base, topExcluded, runs, aux)
-	}
+    mergeSort(elements, keys, base, topExcluded, runs, aux)
+  }
 
-	  
-	final def mergeSort(elements: Array[Int], keys: Array[Int], base: Int, topExcluded: Int, runs: Array[Int], aux: Array[Int]): Unit = {
-	  val n = elements.length
-	  assert(base >= 0)
-	  assert(topExcluded <= n)
-	  assert(elements slice(base, topExcluded) forall { e => e >= 0 && e < keys.length },
-	         "mergeSort input error: elements whose index are in [base, topExcluded) have to be in [0, keys.length)")
-	  assert(runs.length >= n + 1)
-	  assert(aux.length >= n)
-	         
-	  if (topExcluded - base > 1) {
-  	  // runs holds the size of successive increasing runs, initialize it
-	    var el = base
-	    var rSize = 1
-	    var rP = 0
-	    
-	    do {
-	      // invariant: there must be a nonempty increasing run: find its size and stack it in runs
-	      el += 1
-	      while(el < topExcluded && keys(elements(el-1)) <= keys(elements(el))) {
-	        rSize += 1
-	        el += 1
-	      }
-	      runs(rP) = rSize
-	      rSize = 1
-	      rP += 1
-	    } while(el < topExcluded)
-	    runs(rP) = 0
-	      
+    
+  final def mergeSort(elements: Array[Int], keys: Array[Int], base: Int, topExcluded: Int, runs: Array[Int], aux: Array[Int]): Unit = {
+    val n = elements.length
+    assert(base >= 0)
+    assert(topExcluded <= n)
+    assert(elements slice(base, topExcluded) forall { e => e >= 0 && e < keys.length },
+           "mergeSort input error: elements whose index are in [base, topExcluded) have to be in [0, keys.length)")
+    assert(runs.length >= n + 1)
+    assert(aux.length >= n)
+           
+    if (topExcluded - base > 1) {
+      // runs holds the size of successive increasing runs, initialize it
+      var el = base
+      var rSize = 1
+      var rP = 0
+      
+      var keepGoing = true
+      while (keepGoing) {
+        // invariant: there must be a nonempty increasing run: find its size and stack it in runs
+        el += 1
+        while(el < topExcluded && keys(elements(el-1)) <= keys(elements(el))) {
+          rSize += 1
+          el += 1
+        }
+        runs(rP) = rSize
+        rSize = 1
+        rP += 1
+        keepGoing = el < topExcluded
+      }
+      runs(rP) = 0
+        
       if (rP > 1) {  // array is not sorted
         var finalBase = base
         var finalTop = topExcluded
@@ -103,15 +105,15 @@ object SortUtils {
           runs(rP - 1) -= topExcluded - finalTop
         } 
         
-	      val whichArray = mergeSort1(elements, aux, keys, runs, rP + 1, finalBase, 0)
-	      if (whichArray == 1) System.arraycopy(aux, finalBase, elements, finalBase, finalTop - finalBase)
-	    }
-	  }
-	}
-	
-	@annotation.tailrec
-	@inline
-	private final def mergeSort1(tab1: Array[Int], tab2: Array[Int], keys: Array[Int], runs: Array[Int], runsSize: Int, base: Int, which: Int): Int = {
+        val whichArray = mergeSort1(elements, aux, keys, runs, rP + 1, finalBase, 0)
+        if (whichArray == 1) System.arraycopy(aux, finalBase, elements, finalBase, finalTop - finalBase)
+      }
+    }
+  }
+  
+  @annotation.tailrec
+  @inline
+  private final def mergeSort1(tab1: Array[Int], tab2: Array[Int], keys: Array[Int], runs: Array[Int], runsSize: Int, base: Int, which: Int): Int = {
     var runP = 0
     var baseP = base
 
@@ -154,7 +156,7 @@ object SortUtils {
     }
   
     val newRunsSize = (runsSize + 1) >> 1
-	  if (newRunsSize == 1)  1 - which
-	  else                   mergeSort1(tab2, tab1, keys, runs, newRunsSize, base, 1 - which)
-	}
+    if (newRunsSize == 1)  1 - which
+    else                   mergeSort1(tab2, tab1, keys, runs, newRunsSize, base, 1 - which)
+  }
 }

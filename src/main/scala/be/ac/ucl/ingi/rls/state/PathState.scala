@@ -62,7 +62,7 @@ extends TrialState
     if (!markedChanged(demand)) {
       paths(demand).save()
       markedChanged(demand) = true
-      changed(nChanged) = demand
+      changed(nChanged()) = demand
       nChanged_ += 1
     }
   }
@@ -70,17 +70,17 @@ extends TrialState
   override def updateState() = { }
   
   override def commitState() = {
-    while (nChanged > 0) {
+    while (nChanged() > 0) {
       nChanged_ -= 1
-      val demand = changed(nChanged)
+      val demand = changed(nChanged())
       markedChanged(demand) = false
     }
   }
   
   override def revertState() = {
-    while (nChanged > 0) {
+    while (nChanged() > 0) {
       nChanged_ -= 1
-      val demand = changed(nChanged)
+      val demand = changed(nChanged())
       paths(demand).restore()
       markedChanged(demand) = false
     }

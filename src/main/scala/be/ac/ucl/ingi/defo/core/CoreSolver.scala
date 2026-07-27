@@ -161,16 +161,15 @@ class CoreSolver(instance: DEFOInstance, verbose: Boolean, statsFile: Option[Pri
     })
 
     // Load variables
-    val flowsT = flows.transpose
-    val loads = Array.tabulate(topology.nEdges)(i => {
+    val flowsT = flows.transpose.map(_.map(_.asInstanceOf[CPIntVar]))
+    val loads: Array[CPIntVar] = Array.tabulate(topology.nEdges)(i => {
       var load = solutionLoad(i)
       for (d <- demandsId) load -= solutionFlow(d)(i)
-      val all = flowsT(i) ++ Array(CPIntVar(load))
-      sum(all)
+      sum(flowsT(i)) + load
     })
 
     // Rate variables
-    val rates = Array.tabulate(topology.nEdges)(l => {
+    val rates: Array[CPIntVar] = Array.tabulate(topology.nEdges)(l => {
       val rate = CPIntVar(0 to loads(l).max / step(l))
       solver.add(new LoadToRate(loads(l), rate, step(l)))
       rate
