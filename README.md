@@ -88,9 +88,45 @@ java -jar target/repetita-0.1.0.jar \
   -graph data/2016TopologyZooUCL_inverseCapacity/Airtel.graph \
   -demands data/2016TopologyZooUCL_inverseCapacity/Airtel.0000.demands \
   -solver defoCP \
-  -scenario SingleSolverRun \
-  -t 10 \
+  -t 2 \
   -verbose 1
+```
+
+**Example Console Output:**
+
+```text
+              OPTIMIZATION              
+----------------------------------------
+max maxLinkLoad #tunnels        time (ms)
+----------------------------------------
+1603            1               39
+1559            2               43
+1547            3               45
+1491            4               46
+1489            5               48
+1484            6               50
+1404            7               52
+1145            8               54
+1143            9               56
+1019            10              57
+...
+900             26              87
+
+Optimization completed
+----------------------
+number of nodes     : 16
+number of edges     : 74
+number of demands   : 240
+first solution time : 1
+optimization time   : 2724
+initial max maxLinkLoad    : 1617
+final max maxLinkLoad      : 900
+number of tunnels   : 26
+pre-optimization max link utilization 1.6175426666666666
+post-optimization max link utilization 0.9006171666666666
+2 demands over 240 (0.8333333333333334%) have a different segment routing path between pre-optimization and post-optimization
+
+Optimization time (in seconds): 2.729116708
 ```
 
 ### CLI Command Options
