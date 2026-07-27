@@ -49,7 +49,7 @@ REPETITA integrates several powerful optimization engines:
 
 ## Requirements & Prerequisites
 
-- **Java JDK**: Version 17 or higher
+- **Java JDK**: Version 21 or higher
 - **Build Tool**: Apache Maven 3.8+
 - **Python**: Python 3.x (optional, required only for running example external Python solvers)
 
