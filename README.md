@@ -34,7 +34,7 @@ For complete background, methodology, and experimental results, please read the 
 REPETITA integrates several powerful optimization engines:
 
 ### 1. Constraint Programming Engine: MaxiCP (`0.0.3`)
-- **`DefoCP`** (`edu.repetita.solvers.sr.DefoCP`): Segment Routing path optimizer implementing the declarative CP approach described in [Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495). Powered by the lightweight, high-performance **[MaxiCP](https://org.maxicp)** Constraint Programming solver.
+- **`DefoCP`** (`edu.repetita.solvers.sr.DefoCP`): Segment Routing path optimizer implementing the declarative CP approach described in [Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495). Powered by the lightweight, high-performance **[MaxiCP](http://maxicp.org)** Constraint Programming solver.
 
 ### 2. Mixed Integer Programming Engine: Google OR-Tools (`9.8`)
 - **`MIPTwoSRNoSplit`** (`edu.repetita.solvers.sr.MIPTwoSRNoSplit`): Segment Routing optimizer utilizing 2-segment paths inspired by [Bhatia et al., INFOCOM 2015].
