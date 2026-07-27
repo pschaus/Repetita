@@ -42,7 +42,7 @@ REPETITA integrates several powerful optimization engines:
 - **`MCF`** (`edu.repetita.core.MCF`): Linear Program computing the Multi-Commodity Flow optimal lower bound for max link utilization.
 
 ### 3. Local Search & Metaheuristics
-- **`SRLS`** (`edu.repetita.solvers.sr.SRLS`): Sub-second Reactive Local Search path optimizer for Segment Routing based on [Gay et al., INFOCOM 2017](https://link.springer.com/content/pdf/10.1007/978-3-319-23219-5_41.pdf).
+- **`SRLS`** (`edu.repetita.solvers.sr.SRLS`): Sub-second Reactive Local Search path optimizer for Segment Routing based on [Gay et al., INFOCOM 2017](https://ieeexplore.ieee.org/abstract/document/8056971).
 - **`TabuIGPWO`** (`edu.repetita.solvers.wo.TabuLS`): Tabu search IGP weight optimization algorithm inspired by [Fortz & Thorup, INFOCOM 2000].
 
 ### 4. External Solvers Interface
@@ -113,7 +113,7 @@ java -jar target/repetita-0.1.0.jar \
 ### Supported Solvers
 
 - **`defoCP`**: Segment Routing CP optimizer ([Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495)).
-- **`SRLS`**: Sub-second Segment Routing local search optimizer ([Gay et al., INFOCOM 2017](https://link.springer.com/content/pdf/10.1007/978-3-319-23219-5_41.pdf)).
+- **`SRLS`**: Sub-second Segment Routing local search optimizer ([Gay et al., INFOCOM 2017](https://ieeexplore.ieee.org/abstract/document/8056971)).
 - **`MIPTwoSRNoSplit`**: MIP 2-segment routing optimizer ([Bhatia et al., INFOCOM 2015]).
 - **`MIPWeightOptimizer`**: MIP IGP weight optimizer.
 - **`TabuIGPWO`**: Tabu search IGP weight optimizer ([Fortz & Thorup, INFOCOM 2000]).
@@ -182,11 +182,12 @@ If you use REPETITA in your research, please cite the REPETITA paper and the rel
 ### SRLS Sub-Second Local Search Solver
 ```bibtex
 @inproceedings{gay2017expect,
-  title={Expect the Unexpected: Sub-Second Optimization for Segment Routing},
+  title={Expect the unexpected: Sub-second optimization for segment routing},
   author={Gay, Steven and Hartert, Renaud and Vissicchio, Stefano},
   booktitle={IEEE INFOCOM 2017 - IEEE Conference on Computer Communications},
   pages={1--9},
-  year={2017}
+  year={2017},
+  organization={IEEE}
 }
 ```
 
