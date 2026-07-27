@@ -1,10 +1,7 @@
 # REPETITA: Repeatable Experiments for Performance Evaluation of Traffic-Engineering Algorithms
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/uclouvain/repetita)
-[![Java Version](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://www.oracle.com/java/)
-[![Maven](https://img.shields.io/badge/Maven-3.8%2B-C71A36.svg)](https://maven.apache.org/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![arXiv](https://img.shields.io/badge/arXiv-1710.08665-B31B1B.svg)](https://arxiv.org/abs/1710.08665)
+[![Build Status](https://github.com/uclouvain/repetita/actions/workflows/ci.yml/badge.svg)](https://github.com/uclouvain/repetita/actions)
+[![arXiv](https://img.shields.io/badge/arXiv-1710.08665-brightgreen.svg)](https://arxiv.org/abs/1710.08665)
 
 **REPETITA** is an open-source, extensible evaluation framework for Traffic Engineering (TE) algorithms. It provides a standardized environment to run, evaluate, compare, and benchmark routing optimization algorithms under identical conditions on real-world network topologies (such as Internet Topology Zoo and RocketFuel) and traffic demands.
 
