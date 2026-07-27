@@ -46,6 +46,8 @@ public class FlowVisualizer {
    * 
    * @param flow the flow to display
    */
+  private JFrame frame;
+
   public FlowVisualizer(FlowSimulator flow) {
     this.flow = flow;
     topology = flow.getSetting().getTopology();
@@ -82,11 +84,29 @@ public class FlowVisualizer {
     panel = new BasicVisualizationServer<Integer, Integer>(layout);
     panel.add(new GraphZoomScrollPane(viewer), BorderLayout.CENTER);
     
-    JFrame frame = new JFrame("Flow Visualizer");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame = new JFrame("Flow Visualizer - Repetita");
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.getContentPane().add(viewer);
     frame.pack();
     frame.setVisible(true);
+  }
+
+  public void blockUntilClosed() {
+    if (frame == null) return;
+    final Object lock = new Object();
+    frame.addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosed(java.awt.event.WindowEvent e) {
+        synchronized (lock) {
+          lock.notifyAll();
+        }
+      }
+    });
+    synchronized (lock) {
+      try {
+        lock.wait();
+      } catch (InterruptedException ignored) {}
+    }
   }
   
   private void updateUtilization(int edge, double frac) {

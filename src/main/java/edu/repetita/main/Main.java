@@ -217,8 +217,8 @@ public class Main {
 		if (visualize) {
 			edu.repetita.simulators.FlowSimulator flowSim = edu.repetita.simulators.FlowSimulator.getInstance();
 			flowSim.setup(setting);
-			flowSim.computeFlows();
-			new edu.repetita.utils.FlowVisualizer(flowSim);
+			edu.repetita.utils.FlowVisualizer vis = new edu.repetita.utils.FlowVisualizer(flowSim);
+			vis.blockUntilClosed();
 		}
 	}
 }
