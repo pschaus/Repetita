@@ -129,6 +129,39 @@ java -jar target/repetita-0.1.0.jar \
 
 ---
 
+## Network Flow Visualization (GUI)
+
+REPETITA includes an interactive graphical network flow visualizer ([FlowVisualizer.java](file:///Users/pschaus/Documents/source-code/Idea/Repetita/src/main/java/edu/repetita/utils/FlowVisualizer.java)) powered by **JUNG** (Java Universal Network/Graph Framework) and Swing.
+
+It renders an interactive graph window displaying the network topology, dynamically color-coding directed edges according to their relative link utilization (from green for low load, to yellow/orange, up to bright red for bottleneck links at peak capacity).
+
+### Running the Visualizer from CLI
+
+Pass the `-visualize` flag when launching REPETITA:
+
+```bash
+java -jar target/repetita-0.1.0.jar \
+  -graph data/2016TopologyZooUCL_inverseCapacity/Airtel.graph \
+  -demands data/2016TopologyZooUCL_inverseCapacity/Airtel.0000.demands \
+  -solver defoCP \
+  -visualize
+```
+
+### Programmatic Usage in Java
+
+You can also trigger the visualizer programmatically in custom scripts:
+
+```java
+FlowSimulator flowSim = FlowSimulator.getInstance();
+flowSim.setup(setting);
+flowSim.computeFlows();
+
+// Launch interactive Swing visualizer window
+FlowVisualizer visualizer = new FlowVisualizer(flowSim);
+```
+
+---
+
 ## Code Architecture
 
 The codebase is structured under `edu.repetita`:

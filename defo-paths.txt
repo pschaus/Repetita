@@ -10,7 +10,7 @@ Destination 2_Washington_DC
 sequence of middlepoints: 0_New_York -> 2_Washington_DC
 
 Destination 3_Seattle
-sequence of middlepoints: 0_New_York -> 5_Los_Angeles -> 3_Seattle
+sequence of middlepoints: 0_New_York -> 3_Seattle
 
 Destination 4_Sunnyvale
 sequence of middlepoints: 0_New_York -> 4_Sunnyvale
@@ -19,7 +19,7 @@ Destination 5_Los_Angeles
 sequence of middlepoints: 0_New_York -> 5_Los_Angeles
 
 Destination 6_Denver
-sequence of middlepoints: 0_New_York -> 5_Los_Angeles -> 6_Denver
+sequence of middlepoints: 0_New_York -> 8_Houston -> 6_Denver
 
 Destination 7_Kansas_City
 sequence of middlepoints: 0_New_York -> 7_Kansas_City
@@ -70,7 +70,7 @@ Destination 1_Chicago
 sequence of middlepoints: 2_Washington_DC -> 1_Chicago
 
 Destination 3_Seattle
-sequence of middlepoints: 2_Washington_DC -> 8_Houston -> 3_Seattle
+sequence of middlepoints: 2_Washington_DC -> 4_Sunnyvale -> 3_Seattle
 
 Destination 4_Sunnyvale
 sequence of middlepoints: 2_Washington_DC -> 4_Sunnyvale
@@ -187,7 +187,7 @@ Destination 0_New_York
 sequence of middlepoints: 6_Denver -> 0_New_York
 
 Destination 1_Chicago
-sequence of middlepoints: 6_Denver -> 5_Los_Angeles -> 1_Chicago
+sequence of middlepoints: 6_Denver -> 1_Chicago
 
 Destination 2_Washington_DC
 sequence of middlepoints: 6_Denver -> 2_Washington_DC
@@ -208,7 +208,7 @@ Destination 8_Houston
 sequence of middlepoints: 6_Denver -> 8_Houston
 
 Destination 9_Atlanta
-sequence of middlepoints: 6_Denver -> 3_Seattle -> 9_Atlanta
+sequence of middlepoints: 6_Denver -> 5_Los_Angeles -> 9_Atlanta
 
 Destination 10_Indianapolis
 sequence of middlepoints: 6_Denver -> 10_Indianapolis
@@ -223,16 +223,16 @@ Destination 2_Washington_DC
 sequence of middlepoints: 7_Kansas_City -> 2_Washington_DC
 
 Destination 3_Seattle
-sequence of middlepoints: 7_Kansas_City -> 3_Seattle
+sequence of middlepoints: 7_Kansas_City -> 8_Houston -> 3_Seattle
 
 Destination 4_Sunnyvale
 sequence of middlepoints: 7_Kansas_City -> 4_Sunnyvale
 
 Destination 5_Los_Angeles
-sequence of middlepoints: 7_Kansas_City -> 5_Los_Angeles
+sequence of middlepoints: 7_Kansas_City -> 3_Seattle -> 5_Los_Angeles
 
 Destination 6_Denver
-sequence of middlepoints: 7_Kansas_City -> 5_Los_Angeles -> 6_Denver
+sequence of middlepoints: 7_Kansas_City -> 6_Denver
 
 Destination 8_Houston
 sequence of middlepoints: 7_Kansas_City -> 8_Houston
@@ -253,13 +253,13 @@ Destination 2_Washington_DC
 sequence of middlepoints: 8_Houston -> 2_Washington_DC
 
 Destination 3_Seattle
-sequence of middlepoints: 8_Houston -> 5_Los_Angeles -> 3_Seattle
+sequence of middlepoints: 8_Houston -> 3_Seattle
 
 Destination 4_Sunnyvale
 sequence of middlepoints: 8_Houston -> 4_Sunnyvale
 
 Destination 5_Los_Angeles
-sequence of middlepoints: 8_Houston -> 5_Los_Angeles
+sequence of middlepoints: 8_Houston -> 3_Seattle -> 5_Los_Angeles
 
 Destination 6_Denver
 sequence of middlepoints: 8_Houston -> 6_Denver
@@ -283,7 +283,7 @@ Destination 2_Washington_DC
 sequence of middlepoints: 9_Atlanta -> 2_Washington_DC
 
 Destination 3_Seattle
-sequence of middlepoints: 9_Atlanta -> 4_Sunnyvale -> 3_Seattle
+sequence of middlepoints: 9_Atlanta -> 3_Seattle
 
 Destination 4_Sunnyvale
 sequence of middlepoints: 9_Atlanta -> 4_Sunnyvale
@@ -313,19 +313,19 @@ Destination 2_Washington_DC
 sequence of middlepoints: 10_Indianapolis -> 2_Washington_DC
 
 Destination 3_Seattle
-sequence of middlepoints: 10_Indianapolis -> 3_Seattle
+sequence of middlepoints: 10_Indianapolis -> 5_Los_Angeles -> 3_Seattle
 
 Destination 4_Sunnyvale
-sequence of middlepoints: 10_Indianapolis -> 2_Washington_DC -> 4_Sunnyvale
+sequence of middlepoints: 10_Indianapolis -> 0_New_York -> 4_Sunnyvale
 
 Destination 5_Los_Angeles
 sequence of middlepoints: 10_Indianapolis -> 5_Los_Angeles
 
 Destination 6_Denver
-sequence of middlepoints: 10_Indianapolis -> 8_Houston -> 6_Denver
+sequence of middlepoints: 10_Indianapolis -> 5_Los_Angeles -> 6_Denver
 
 Destination 7_Kansas_City
-sequence of middlepoints: 10_Indianapolis -> 9_Atlanta -> 7_Kansas_City
+sequence of middlepoints: 10_Indianapolis -> 8_Houston -> 7_Kansas_City
 
 Destination 8_Houston
 sequence of middlepoints: 10_Indianapolis -> 8_Houston
