@@ -218,6 +218,7 @@ public class Main {
 			edu.repetita.simulators.FlowSimulator flowSim = edu.repetita.simulators.FlowSimulator.getInstance();
 			flowSim.setup(setting);
 			edu.repetita.utils.FlowVisualizer vis = new edu.repetita.utils.FlowVisualizer(flowSim);
+			vis.saveImage("doc/visualizer_demo.png");
 			vis.blockUntilClosed();
 		}
 	}

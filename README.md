@@ -167,6 +167,8 @@ Optimization time (in seconds): 2.729116708
 
 ## Network Flow Visualization (GUI)
 
+![Network Flow Visualization Screenshot](doc/visualizer_demo.png)
+
 REPETITA includes an interactive graphical network flow visualizer ([FlowVisualizer.java](file:///Users/pschaus/Documents/source-code/Idea/Repetita/src/main/java/edu/repetita/utils/FlowVisualizer.java)) powered by **JUNG** (Java Universal Network/Graph Framework) and Swing.
 
 It renders an interactive graph window displaying the network topology, dynamically color-coding directed edges according to their relative link utilization (from green for low load, to yellow/orange, up to bright red for bottleneck links at peak capacity).

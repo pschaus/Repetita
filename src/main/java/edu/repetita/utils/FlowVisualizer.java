@@ -10,6 +10,10 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -226,6 +230,29 @@ public class FlowVisualizer {
         }
         float ratio = maxUtil > 0 ? (float) (util / maxUtil) : 0f;
         return getGradColor(ratio);
+    }
+
+    public void saveImage(String filePath) {
+        int width = frame != null ? frame.getWidth() : 950;
+        int height = frame != null ? frame.getHeight() : 750;
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        if (frame != null) {
+            frame.paint(g2);
+        } else {
+            viewer.paint(g2);
+        }
+        g2.dispose();
+        try {
+            File outputFile = new File(filePath);
+            if (outputFile.getParentFile() != null) {
+                outputFile.getParentFile().mkdirs();
+            }
+            ImageIO.write(image, "png", outputFile);
+            System.out.println("Visualization screenshot saved to: " + outputFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Failed to save visualization screenshot: " + e.getMessage());
+        }
     }
 
     public void blockUntilClosed() {
