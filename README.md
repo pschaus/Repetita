@@ -1,4 +1,4 @@
-# REPETITA: REpeatable Experiments in Traffic Engineering
+# REPETITA: Repeatable Experiments for Performance Evaluation of Traffic-Engineering Algorithms
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/uclouvain/repetita)
 [![Java Version](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://www.oracle.com/java/)
@@ -9,8 +9,8 @@
 **REPETITA** is an open-source, extensible evaluation framework for Traffic Engineering (TE) algorithms. It provides a standardized environment to run, evaluate, compare, and benchmark routing optimization algorithms under identical conditions on real-world network topologies (such as Internet Topology Zoo and RocketFuel) and traffic demands.
 
 For complete background, methodology, and experimental results, please read the accompanying paper:
-> **REPETITA: Repeatable Experiments in Traffic Engineering**  
-> S. Vissicchio, O. Tilmans, L. Vanbever, R. Hartert.  
+> **REPETITA: Repeatable Experiments for Performance Evaluation of Traffic-Engineering Algorithms**  
+> Steven Gay, Pierre Schaus, Stefano Vissicchio  
 > [arXiv:1710.08665](https://arxiv.org/abs/1710.08665) [cs.NI].
 
 ---
@@ -158,9 +158,9 @@ If you use REPETITA in your research, please cite the REPETITA paper and the rel
 
 ### REPETITA Benchmark Framework
 ```bibtex
-@article{vissicchio2017repetita,
-  title={REPETITA: Repeatable Experiments in Traffic Engineering},
-  author={Vissicchio, Stefano and Tilmans, Olivier and Vanbever, Laurent and Hartert, Renaud},
+@article{gay2017repetita,
+  title={REPETITA: Repeatable Experiments for Performance Evaluation of Traffic-Engineering Algorithms},
+  author={Gay, Steven and Schaus, Pierre and Vissicchio, Stefano},
   journal={arXiv preprint arXiv:1710.08665},
   year={2017}
 }
