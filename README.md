@@ -34,7 +34,7 @@ For complete background, methodology, and experimental results, please read the 
 REPETITA integrates several powerful optimization engines:
 
 ### 1. Constraint Programming Engine: MaxiCP (`0.0.3`)
-- **`DefoCP`** (`edu.repetita.solvers.sr.DefoCP`): Segment Routing path optimizer implementing the declarative CP approach described in [Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495). Powered by the lightweight, high-performance **[MaxiCP](http://maxicp.org)** Constraint Programming solver.
+- **`DefoCP`** (`edu.repetita.solvers.sr.DefoCP`): Segment Routing path optimizer implementing the declarative CP approach described in [Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495) and [Hartert et al., CP 2015](https://link.springer.com/chapter/10.1007/978-3-319-23219-5_41). Powered by the lightweight, high-performance **[MaxiCP](http://maxicp.org)** Constraint Programming solver.
 
 ### 2. Mixed Integer Programming Engine: Google OR-Tools (`9.8`)
 - **`MIPTwoSRNoSplit`** (`edu.repetita.solvers.sr.MIPTwoSRNoSplit`): Segment Routing optimizer utilizing 2-segment paths inspired by [Bhatia et al., INFOCOM 2015].
@@ -148,7 +148,7 @@ Optimization time (in seconds): 2.729116708
 
 ### Supported Solvers
 
-- **`defoCP`**: Segment Routing CP optimizer ([Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495)).
+- **`defoCP`**: Segment Routing CP optimizer ([Hartert et al., SIGCOMM 2015](https://dl.acm.org/doi/pdf/10.1145/2829988.2787495); [Hartert et al., CP 2015](https://link.springer.com/chapter/10.1007/978-3-319-23219-5_41)).
 - **`SRLS`**: Sub-second Segment Routing local search optimizer ([Gay et al., INFOCOM 2017](https://ieeexplore.ieee.org/abstract/document/8056971)).
 - **`MIPTwoSRNoSplit`**: MIP 2-segment routing optimizer ([Bhatia et al., INFOCOM 2015]).
 - **`MIPWeightOptimizer`**: MIP IGP weight optimizer.
@@ -250,6 +250,15 @@ If you use REPETITA in your research, please cite the REPETITA paper and the rel
   number={4},
   pages={15--28},
   year={2015}
+}
+
+@inproceedings{hartert2015solving,
+  title={Solving Segment Routing Problems with Hybrid Constraint Programming Techniques},
+  author={Hartert, Renaud and Schaus, Pierre and Vissicchio, Stefano and Bonaventure, Olivier},
+  booktitle={International Conference on Principles and Practice of Constraint Programming (CP 2015)},
+  pages={592--608},
+  year={2015},
+  organization={Springer}
 }
 ```
 
