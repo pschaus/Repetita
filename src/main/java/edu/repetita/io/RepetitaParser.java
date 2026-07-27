@@ -3,7 +3,6 @@ package edu.repetita.io;
 import edu.repetita.core.Demands;
 import edu.repetita.core.Topology;
 import edu.repetita.utils.datastructures.Conversions;
-import scala.io.Source;
 
 import java.io.BufferedReader;
 import java.io.IOException;

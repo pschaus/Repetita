@@ -1,10 +1,10 @@
 package edu.repetita.solvers.sr;
 
-import be.ac.ucl.ingi.defo.core.DEFOInstance;
-import be.ac.ucl.ingi.defo.modeling.DEFOConstraint;
-import be.ac.ucl.ingi.defo.modeling.DEFOptimizer;
-import be.ac.ucl.ingi.defo.modeling.units.RelativeUnit;
-import be.ac.ucl.ingi.defo.modeling.units.TimeUnit;
+import edu.repetita.solvers.sr.defo.core.DEFOInstance;
+import edu.repetita.solvers.sr.defo.modeling.DEFOConstraint;
+import edu.repetita.solvers.sr.defo.modeling.DEFOptimizer;
+import edu.repetita.solvers.sr.defo.modeling.units.RelativeUnit;
+import edu.repetita.solvers.sr.defo.modeling.units.TimeUnit;
 import edu.repetita.core.Demands;
 import edu.repetita.core.Setting;
 import edu.repetita.core.Topology;
@@ -47,7 +47,7 @@ public class DefoCP extends SRSolver {
         Demands demands = setting.getDemands();
 
         // translate in scala data structures
-        be.ac.ucl.ingi.defo.core.Topology defoTopology = be.ac.ucl.ingi.defo.core.Topology.apply(topology.edgeSrc, topology.edgeDest);
+        edu.repetita.solvers.sr.defo.core.Topology defoTopology = edu.repetita.solvers.sr.defo.core.Topology.apply(topology.edgeSrc, topology.edgeDest);
 
         int[] edgeCapacities = new int[nEdges];
         for (int edge = 0; edge < nEdges; edge++) edgeCapacities[edge] = (int) topology.edgeCapacity[edge];
