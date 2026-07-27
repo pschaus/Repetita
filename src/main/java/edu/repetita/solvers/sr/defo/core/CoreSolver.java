@@ -283,55 +283,59 @@ public class CoreSolver {
             solutionMaxRate = objective.min();
         });
 
-        // Add constraints
-        for (int i = 0; i < demandsId.length; i++) {
-            int demand = demandsId[i];
-            solver.post(CPFactory.le(paths[i].length, 4));
-            solver.post(new CanReach(paths[i], reachStruct));
-            solver.post(new DAGPath(paths[i], flows[i], ecmpStruct));
-            solver.post(new SegmentToNetwork(paths[i], flows[i], ecmpStruct, demandTraffics[demand]));
-            solver.post(new NetworkToSegment(paths[i], flows[i], ecmpStruct, demandTraffics[demand]));
+        try {
+            // Add constraints
+            for (int i = 0; i < demandsId.length; i++) {
+                int demand = demandsId[i];
+                solver.post(CPFactory.le(paths[i].length, 4));
+                solver.post(new CanReach(paths[i], reachStruct));
+                solver.post(new DAGPath(paths[i], flows[i], ecmpStruct));
+                solver.post(new SegmentToNetwork(paths[i], flows[i], ecmpStruct, demandTraffics[demand]));
+                solver.post(new NetworkToSegment(paths[i], flows[i], ecmpStruct, demandTraffics[demand]));
 
-            for (DEFOConstraint constraint : demandConstraints[demand]) {
-                if (constraint instanceof DEFOConstraint.DEFOAvoidNode) {
-                    DEFOConstraint.DEFOAvoidNode avoid = (DEFOConstraint.DEFOAvoidNode) constraint;
-                    int nodeId = avoid.nodeId;
-                    for (int edge : topology.outEdges(nodeId)) solver.post(CPFactory.eq(flows[i][edge], 0));
-                    for (int edge : topology.inEdges(nodeId)) solver.post(CPFactory.eq(flows[i][edge], 0));
-                } else if (constraint instanceof DEFOConstraint.DEFOAvoidEdge) {
-                    DEFOConstraint.DEFOAvoidEdge avoid = (DEFOConstraint.DEFOAvoidEdge) constraint;
-                    solver.post(CPFactory.eq(flows[i][avoid.edgeId], 0));
-                } else if (constraint instanceof DEFOConstraint.DEFOPassThrough) {
-                    DEFOConstraint.DEFOPassThrough pass = (DEFOConstraint.DEFOPassThrough) constraint;
-                    Set<Integer> nodeSet = new HashSet<>();
-                    for (int n : pass.nodes) nodeSet.add(n);
-                    solver.post(new PassThrough(paths[i], nodeSet));
-                } else if (constraint instanceof DEFOConstraint.DEFOPassThroughSeq) {
-                    DEFOConstraint.DEFOPassThroughSeq pass = (DEFOConstraint.DEFOPassThroughSeq) constraint;
-                    solver.post(new PassThroughSeq(paths[i], pass.seqNodes));
-                } else if (constraint instanceof DEFOConstraint.DEFOLowerLength) {
-                    DEFOConstraint.DEFOLowerLength lower = (DEFOConstraint.DEFOLowerLength) constraint;
-                    solver.post(CPFactory.lt(paths[i].length, lower.length));
-                } else if (constraint instanceof DEFOConstraint.DEFOLowerEqLength) {
-                    DEFOConstraint.DEFOLowerEqLength lower = (DEFOConstraint.DEFOLowerEqLength) constraint;
-                    solver.post(CPFactory.le(paths[i].length, lower.length));
+                for (DEFOConstraint constraint : demandConstraints[demand]) {
+                    if (constraint instanceof DEFOConstraint.DEFOAvoidNode) {
+                        DEFOConstraint.DEFOAvoidNode avoid = (DEFOConstraint.DEFOAvoidNode) constraint;
+                        int nodeId = avoid.nodeId;
+                        for (int edge : topology.outEdges(nodeId)) solver.post(CPFactory.eq(flows[i][edge], 0));
+                        for (int edge : topology.inEdges(nodeId)) solver.post(CPFactory.eq(flows[i][edge], 0));
+                    } else if (constraint instanceof DEFOConstraint.DEFOAvoidEdge) {
+                        DEFOConstraint.DEFOAvoidEdge avoid = (DEFOConstraint.DEFOAvoidEdge) constraint;
+                        solver.post(CPFactory.eq(flows[i][avoid.edgeId], 0));
+                    } else if (constraint instanceof DEFOConstraint.DEFOPassThrough) {
+                        DEFOConstraint.DEFOPassThrough pass = (DEFOConstraint.DEFOPassThrough) constraint;
+                        Set<Integer> nodeSet = new HashSet<>();
+                        for (int n : pass.nodes) nodeSet.add(n);
+                        solver.post(new PassThrough(paths[i], nodeSet));
+                    } else if (constraint instanceof DEFOConstraint.DEFOPassThroughSeq) {
+                        DEFOConstraint.DEFOPassThroughSeq pass = (DEFOConstraint.DEFOPassThroughSeq) constraint;
+                        solver.post(new PassThroughSeq(paths[i], pass.seqNodes));
+                    } else if (constraint instanceof DEFOConstraint.DEFOLowerLength) {
+                        DEFOConstraint.DEFOLowerLength lower = (DEFOConstraint.DEFOLowerLength) constraint;
+                        solver.post(CPFactory.lt(paths[i].length, lower.length));
+                    } else if (constraint instanceof DEFOConstraint.DEFOLowerEqLength) {
+                        DEFOConstraint.DEFOLowerEqLength lower = (DEFOConstraint.DEFOLowerEqLength) constraint;
+                        solver.post(CPFactory.le(paths[i].length, lower.length));
+                    }
                 }
             }
-        }
 
-        for (int link = 0; link < nEdges; link++) {
-            if (solutionRate[link] == maxUsage) {
-                solver.post(CPFactory.le(rates[link], maxUsage));
-            } else if (solutionRate[link] <= grain && maxUsage > grain) {
-                solver.post(CPFactory.le(rates[link], grain));
-            } else {
-                solver.post(CPFactory.lt(rates[link], maxUsage));
+            for (int link = 0; link < nEdges; link++) {
+                if (solutionRate[link] == maxUsage) {
+                    solver.post(CPFactory.le(rates[link], maxUsage));
+                } else if (solutionRate[link] <= grain && maxUsage > grain) {
+                    solver.post(CPFactory.le(rates[link], grain));
+                } else {
+                    solver.post(CPFactory.lt(rates[link], maxUsage));
+                }
             }
-        }
-        solver.post(CPFactory.lt(rates[selected], maxUsage));
+            solver.post(CPFactory.lt(rates[selected], maxUsage));
 
-        long startTime = System.currentTimeMillis();
-        search.solve(stats -> stats.numberOfSolutions() >= 1 || (System.currentTimeMillis() - startTime) >= 1000);
+            long startTime = System.currentTimeMillis();
+            search.solve(stats -> stats.numberOfSolutions() >= 1 || (System.currentTimeMillis() - startTime) >= 1000);
+        } catch (org.maxicp.util.exception.InconsistencyException e) {
+            // Root node infeasible for this LNS neighborhood attempt
+        }
     }
 
     public void searchInitialSol() {
