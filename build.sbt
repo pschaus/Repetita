@@ -18,7 +18,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 // Adding a library dependency for ScalaTest
 libraryDependencies ++= Seq(
     "com.google.ortools" % "ortools-java" % "9.8.3296",
-    "io.github.pschaus" %% "oscar-cp" % "4.0.0",
+    "org.maxicp" % "maxicp" % "0.0.3",
     "org.scalatest" %% "scalatest" % "3.2.16" % Test,
     "org.apache.commons" % "commons-lang3" % "3.13.0",
     "net.sourceforge.collections" % "collections-generic" % "4.01",

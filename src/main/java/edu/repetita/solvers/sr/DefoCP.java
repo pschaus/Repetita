@@ -58,7 +58,7 @@ public class DefoCP extends SRSolver {
         DEFOConstraint[] topologyConstraints = new DEFOConstraint[0];
 
         DEFOInstance instance = new DEFOInstance(defoTopology, topology.edgeWeight, demandTraffic, demands.source, demands.dest, demandConstraints, topologyConstraints, edgeCapacities, topology.edgeLatency);
-        DEFOptimizer optimizer = new DEFOptimizer(instance, this.verbose > 0, scala.Option.apply((PrintWriter) null));
+        DEFOptimizer optimizer = new DEFOptimizer(instance, this.verbose > 0, null);
 
         TimeUnit timeLimit = new TimeUnit((int) timeMillis, timeMillis + "ms");
 
@@ -71,7 +71,7 @@ public class DefoCP extends SRSolver {
         this.solveTime = timeAfter - timeBefore;
 
         // write results back
-        int[][] bestPaths = optimizer.core().bestPaths();
+        int[][] bestPaths = optimizer.core.bestPaths();
         SRPaths paths = new SRPaths(setting.getDemands(),setting.getTopology().nNodes);
         for (int demand = 0; demand < demands.nDemands; demand++) {
             paths.setPath(demand, bestPaths[demand]);
