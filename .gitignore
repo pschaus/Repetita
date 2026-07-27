@@ -3,6 +3,8 @@ target/
 bin/
 *.log
 *.out
+*-paths.txt
+dependency-reduced-pom.xml
 
 # macOS files
 .DS_Store
