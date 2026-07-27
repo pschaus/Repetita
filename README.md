@@ -43,7 +43,7 @@ REPETITA integrates several powerful optimization engines:
 
 ### 3. Local Search & Metaheuristics
 - **`SRLS`** (`edu.repetita.solvers.sr.SRLS`): Sub-second Reactive Local Search path optimizer for Segment Routing based on [Gay et al., INFOCOM 2017](https://ieeexplore.ieee.org/abstract/document/8056971).
-- **`TabuIGPWO`** (`edu.repetita.solvers.wo.TabuLS`): Tabu search IGP weight optimization algorithm inspired by [Fortz & Thorup, INFOCOM 2000].
+- **`TabuIGPWO`** (`edu.repetita.solvers.wo.TabuLS`): Tabu search IGP weight optimization algorithm ([Fortz & Thorup, INFOCOM 2000](https://ieeexplore.ieee.org/document/832263)).
 
 ### 4. External Solvers Interface
 - Interface allowing custom standalone executables (e.g., Python scripts in `external_solvers/`) to be executed as REPETITA solvers.
@@ -116,7 +116,7 @@ java -jar target/repetita-0.1.0.jar \
 - **`SRLS`**: Sub-second Segment Routing local search optimizer ([Gay et al., INFOCOM 2017](https://ieeexplore.ieee.org/abstract/document/8056971)).
 - **`MIPTwoSRNoSplit`**: MIP 2-segment routing optimizer ([Bhatia et al., INFOCOM 2015]).
 - **`MIPWeightOptimizer`**: MIP IGP weight optimizer.
-- **`TabuIGPWO`**: Tabu search IGP weight optimizer ([Fortz & Thorup, INFOCOM 2000]).
+- **`TabuIGPWO`**: Tabu search IGP weight optimizer ([Fortz & Thorup, INFOCOM 2000](https://ieeexplore.ieee.org/document/832263)).
 - **`IGP`**: Baseline IGP shortest-path routing (ECMP).
 - **`randomExplicitPaths` / `randomLinkWeights`**: Sample external solvers specified in `external_solvers/solvers-specs.txt`.
 
@@ -187,6 +187,19 @@ If you use REPETITA in your research, please cite the REPETITA paper and the rel
   booktitle={IEEE INFOCOM 2017 - IEEE Conference on Computer Communications},
   pages={1--9},
   year={2017},
+  organization={IEEE}
+}
+```
+
+### TabuIGPWO Weight Optimization Solver
+```bibtex
+@inproceedings{fortz2000internet,
+  title={Internet traffic engineering by optimizing OSPF weights},
+  author={Fortz, Bernard and Thorup, Mikkel},
+  booktitle={Proceedings IEEE INFOCOM 2000. Conference on Computer Communications. Nineteenth Annual Joint Conference of the IEEE Computer and Communications Societies},
+  volume={2},
+  pages={519--528},
+  year={2000},
   organization={IEEE}
 }
 ```
